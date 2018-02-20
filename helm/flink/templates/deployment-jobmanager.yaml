@@ -38,6 +38,8 @@ spec:
           mountPath: /etc/flink
         - name: {{ template "fullname" . }}-hadoop-config
           mountPath: /etc/hadoop/conf
+        - name: {{ template "fullname" . }}-checkpoints
+          mountPath: /tmp/flink
       volumes:
         - name: {{ template "fullname" . }}-flink-config
           configMap:
@@ -45,3 +47,6 @@ spec:
         - name: {{ template "fullname" . }}-hadoop-config
           configMap:
             name: {{ template "fullname" . }}-hadoop-config
+        - name: {{ template "fullname" . }}-checkpoints
+          hostPath:
+            path: /tmp
